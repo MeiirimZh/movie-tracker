@@ -1,4 +1,5 @@
 import { SQLiteProvider } from "expo-sqlite";
+import * as MoviesQueries from "./src/database/queries/MoviesQueries";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -17,7 +18,8 @@ export default function App() {
     <SQLiteProvider
       databaseName="local.db"
       onInit={async (db) => {
-        
+          await db.execAsync(MoviesQueries.DROP_TABLE);
+          await db.execAsync(MoviesQueries.CREATE_TABE);
       }}>
       <NavigationContainer>
         <Tab.Navigator screenOptions={({ route }) => ({
