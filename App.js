@@ -10,6 +10,7 @@ import Books from "./screens/Books";
 import Games from "./screens/Games";
 
 import { Ionicons } from "@expo/vector-icons";
+import { theme } from "./src/theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,12 +35,17 @@ export default function App() {
             return (
               <Ionicons name={ icons[route.name] } color={ color } size={ size } />
             )
-          }
+          },
+          tabBarActiveTintColor: theme.colors.primary,
+          tabBarInactiveTintColor: theme.colors.textMuted,
+          tabBarStyle: { height: 100 },
+
+          headerShown: false
         })}>
-          <Tab.Screen name="Movies" component={ Movies } />
-          <Tab.Screen name="Series" component={ Series } />
-          <Tab.Screen name="Books" component={ Books } />
-          <Tab.Screen name="Games" component={ Games } />
+          <Tab.Screen name="Movies" component={ Movies } options={{ title: 'Фильмы' }} />
+          <Tab.Screen name="Series" component={ Series } options={{ title: 'Сериалы' }} />
+          <Tab.Screen name="Books" component={ Books } options={{ title: 'Книги' }} />
+          <Tab.Screen name="Games" component={ Games } options={{ title: 'Игры' }} />
         </Tab.Navigator>
       </NavigationContainer>
     </SQLiteProvider>
