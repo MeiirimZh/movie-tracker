@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { useSQLiteContext } from "expo-sqlite";
 
 const useMovies = () => {
@@ -15,9 +16,11 @@ const useMovies = () => {
         }
     };
 
-    useEffect(() => {
-        loadMovies();
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            loadMovies();
+        }, [])
+    );
 
     return { movies, setMovies };
 };
